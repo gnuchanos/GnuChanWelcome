@@ -66,12 +66,13 @@ GnuChanSettings provides a **GnuChanWelcome** category/entry for this guide's
 
 ## Included programs
 
-The guide describes the 21 supplied projects:
+The guide describes the 24 supplied projects:
 GnuChanBrowser, GnuChanDesktop, GnuChanDM, GnuChanDock, GnuChanFetch,
-GnuChanFileManager, GnuChanGUI, GnuChanLockScreen, GnuChanNetworkManager,
-GnuChanNotification, GnuChanRunner, GnuChanScreenShoot, GnuChanSettings,
-GnuChanSoftwareCenter, GnuChanSound, GnuChanSS, GnuChanTerm, GnuChanTop,
-GnuChanWelcome, GnuChanWifi, and GnuChanWM.
+GnuChanFileManager, GnuChanGUI, GnuChanImageViewer, GnuChanLockScreen,
+GnuChanNetworkManager, GnuChanNotification, GnuChanRunner, GnuChanScreenShoot,
+GnuChanSettings, GnuChanSoftwareCenter, GnuChanSound, GnuChanSoundRecord,
+GnuChanSS, GnuChanTerm, GnuChanTop, GnuChanWelcome, GnuChanWifi, GnuChanWM,
+and GnuChanBluetooth.
 
 GnuChanGUI is a reusable toolkit/library, not a launchable program, so it has
 no standalone config or GnuChanSettings category. GnuChanBrowser's card points

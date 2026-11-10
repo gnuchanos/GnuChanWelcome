@@ -37,6 +37,7 @@ PROGRAMS = (
     Program("GnuChanDock", "The desktop dock for launching and switching between programs.", "~/.config/GnuChanDock/GnuChanDock.conf", "GnuChanDock", "Desktop"),
     Program("GnuChanDesktop", "Set your wallpaper, background colour, and display layout.", "~/.config/gnuchan-desktop/panel.conf", "GnuChanDesktop", "Desktop"),
     Program("GnuChanFileManager", "Browse files and folders, including hidden files.", "~/.config/GnuChanFileManager/config.conf", "GnuChanFileManager", "Desktop"),
+    Program("GnuChanImageViewer", "View, organize, and make basic edits to images.", "No user configuration file", "No dedicated Settings category", "Apps"),
     Program("GnuChanLockScreen", "Lock the screen and require your password to unlock it (the installed program is GnuChanSL).", "~/.config/GnuChanSL/GnuChanSL.conf", "GnuChanSL", "Desktop"),
     Program("GnuChanBrowser", "A lightweight web browser for visiting websites.", "GnuChanBrowser/src/GnuChanBrowser_config/GnuChanBrowser.conf (source template; not currently loaded by the browser)", "Not currently available in GnuChanSettings", "Apps"),
     Program("GnuChanGUI", "A reusable GUI toolkit/library for building graphical applications; it is not a launchable desktop app.", "No standalone config (library)", "No standalone Settings category (library)", "Apps"),
@@ -47,18 +48,20 @@ PROGRAMS = (
     Program("GnuChanNotification", "Display desktop notification bubbles.", "~/.config/GnuChanNotification/GnuChanNotification.conf", "GnuChanNotification", "Apps"),
     Program("GnuChanScreenShoot", "Capture screenshots and choose where they are saved.", "~/.config/GnuChanScreenShoot/GnuChanScreenShoot.conf", "GnuChanScreenShoot", "Apps"),
     Program("GnuChanSoftwareCenter", "Browse packages and manage GnuChan updates.", "~/.config/GnuChanSoftwareCenter/GnuChanSoftwareCenter.conf", "GnuChanSoftwareCenter", "Apps"),
+    Program("GnuChanSoundRecord", "Record audio from an available microphone.", "No user configuration file", "No dedicated Settings category", "Apps"),
     Program("GnuChanTop", "Monitor system processes and resource use.", "~/.config/GnuChanTop/GnuChanTop.conf", "GnuChanTop", "Apps"),
     Program("GnuChanSettings", "The control panel for configuring GnuChan programs and system options.", "~/.config/GnuChanSettings/system.conf", "System", "System"),
     Program("GnuChanSound", "Control PipeWire audio; its language preference is shared with GnuChan apps.", "~/.config/GnuChanSettings/system.conf", "GnuChanSound", "System"),
     Program("GnuChanWifi", "Connect to and manage Wi-Fi networks.", "~/.config/GnuChanWifi/config.conf", "GnuChanWifi", "System"),
     Program("GnuChanNetworkManager", "Configure network interfaces, DNS, and the resolver.", "~/.config/GnuChanNetworkManager/config.conf", "GnuChanNetworkManager", "System"),
+    Program("GnuChanBluetooth", "Discover and manage Bluetooth adapters and paired devices.", "No user configuration file", "No dedicated Settings category", "System"),
     Program("GnuChanWelcome", "This first-login guide introduces GnuChan programs and settings.", "~/.config/GnuChanWelcome/welcome.conf", "GnuChanWelcome", "System"),
 )
 
 GROUPS = (
     ("Desktop", "Your desktop", "The parts of the desktop you see and use every day."),
-    ("Apps", "Programs and tools", "Useful applications for commands, information, files, and system activity."),
-    ("System", "Settings and system tools", "Configure audio, networking, and the GnuChan system."),
+    ("Apps", "Programs and tools", "Useful applications for commands, information, files, images, audio, and system activity."),
+    ("System", "Settings and system tools", "Configure audio, networking, Bluetooth, and the GnuChan system."),
 )
 
 

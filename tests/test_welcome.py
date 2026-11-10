@@ -73,12 +73,14 @@ class WelcomeConfigTests(unittest.TestCase):
 class ProgramCatalogTests(unittest.TestCase):
     EXPECTED_PROGRAMS = {
         "GnuChanBrowser",
+        "GnuChanBluetooth",
         "GnuChanDesktop",
         "GnuChanDM",
         "GnuChanDock",
         "GnuChanFetch",
         "GnuChanFileManager",
         "GnuChanGUI",
+        "GnuChanImageViewer",
         "GnuChanLockScreen",
         "GnuChanNetworkManager",
         "GnuChanNotification",
@@ -87,6 +89,7 @@ class ProgramCatalogTests(unittest.TestCase):
         "GnuChanSettings",
         "GnuChanSoftwareCenter",
         "GnuChanSound",
+        "GnuChanSoundRecord",
         "GnuChanSS",
         "GnuChanTerm",
         "GnuChanTop",
@@ -146,6 +149,20 @@ class ProgramCatalogTests(unittest.TestCase):
             "~/.config/GnuChanWelcome/welcome.conf",
         )
         self.assertEqual(app.settings_category, "GnuChanWelcome")
+
+    def test_new_app_cards_are_in_their_matching_groups(self):
+        expected = {
+            "GnuChanBluetooth": "System",
+            "GnuChanImageViewer": "Apps",
+            "GnuChanSoundRecord": "Apps",
+        }
+        for name, group in expected.items():
+            with self.subTest(program=name):
+                app = next(program for program in welcome.PROGRAMS if program.name == name)
+                self.assertEqual(app.group, group)
+                self.assertTrue(app.description)
+                self.assertIn("No user configuration", app.config_path)
+                self.assertIn("No dedicated Settings", app.settings_category)
 
     def test_every_group_has_a_program(self):
         for group, _title, _description in welcome.GROUPS:
