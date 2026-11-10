@@ -1,68 +1,76 @@
 # GnuChanWelcome
 
-GnuChanWelcome is a small Python/Tk desktop guide for first login. Its tabs
-describe the GnuChan programs and show each program's configuration file and
-the category to open in GnuChanSettings.
+GnuChanWelcome is a native C application drawn directly with X11 and Xft. It
+has no Python, Tk, or GTK runtime dependency. Its tabs describe the supplied
+GnuChan programs, their configuration paths, and the matching GnuChanSettings
+categories. The purple palette matches GnuChanSettings' default theme.
 
-## Run and build
+The program is built and installed as `GnuChanWelcome`. It uses mouse-wheel
+scrolling, Page Up/Page Down, Home/End, and keys 1-4
+to navigate. The Open GnuChanSettings button launches the settings program.
 
-Run the guide with `python3 gnuchan_welcome.py`. The installable command is
-`gnuchan-welcome`; it requires Python 3 and Tk (`python3-tk` on Debian).
+## Build and test
 
-On Debian/Ubuntu, install system-wide with:
+Build dependencies on Debian/Ubuntu:
+
+```sh
+sudo apt install build-essential pkg-config libx11-dev libxft-dev
+```
+
+Build and run focused tests with:
+
+```sh
+make
+make test
+```
+
+`make test` validates command-line/configuration behavior, staged
+install/uninstall, and (when available) the X11 window under Xvfb. To run the
+application:
+
+```sh
+build/GnuChanWelcome
+```
+
+Command-line options:
+
+```text
+GnuChanWelcome [--first-run] [--check-config] [--config PATH] [--version]
+```
+
+## Install
+
+Install system-wide with:
 
 ```sh
 sudo sh install.sh
 ```
 
-The installer places the command in `/usr/local/bin/gnuchan-welcome`, the menu
-entry in `/usr/local/share/applications/gnuchan-welcome.desktop`, and the
-first-login autostart entry in `/etc/xdg/autostart/gnuchan-welcome.desktop`.
-The autostart entry invokes `gnuchan-welcome --first-run`. The first time the
-guide is dismissed, it records completion for the current user; later
-autostart launches exit without opening a window. The application-menu entry
-opens the guide whenever selected. Run `sudo sh uninstall.sh` to remove the
-program and desktop entries.
+The binary is `/usr/local/bin/GnuChanWelcome`; the desktop-menu entry and
+first-login autostart entry are installed under `/usr/local/share/applications`
+and `/etc/xdg/autostart`. `PREFIX`, `SYSCONFDIR`, and `DESTDIR` are supported
+for packaging and staging. Remove the program and entries with
+`sudo sh uninstall.sh`.
 
-The system-wide entry follows the XDG autostart convention. GnuChanWM starts
-programs from its own `gcl_autostart.all` list rather than reading XDG entries;
-the GnuChanWM session defaults used by a distro image must therefore also
-include `gnuchan-welcome --first-run` in that list. The completion check makes
-that command harmless on subsequent logins.
+GnuChanWM starts programs from its own `gcl_autostart.all` list rather than
+reading XDG autostart entries. The distro's default GnuChanWM configuration
+therefore also starts `GnuChanWelcome --first-run`. Subsequent first-run
+launches exit after the welcome guide has been dismissed.
 
-Both installer scripts honor `PREFIX`, `SYSCONFDIR`, and `DESTDIR`, for example
-when packaging the application into an ISO or staging root:
+## Configuration and first run
 
-```sh
-DESTDIR=/path/to/stage PREFIX=/usr SYSCONFDIR=/etc sh install.sh
-```
-
-The distro's live-ISO build should install this repository using that
-destination root; installing the application alone does not add it to a
-separate distro build definition.
-
-Run `sh build.sh` in Linux or WSL to compile-check, run unit tests, validate the
-example configuration, check shell installer syntax, and exercise staged,
-repeatable install/uninstall plus the completed first-run path.
-
-## Configuration and first-run behavior
-
-Welcome stores per-user state at
-`~/.config/GnuChanWelcome/welcome.conf` (or
-`$XDG_CONFIG_HOME/GnuChanWelcome/welcome.conf`). It uses the same simple
-`Key = value` format used by other GnuChan applications:
+The per-user state file is
+`~/.config/GnuChanWelcome/welcome.conf`, or
+`$XDG_CONFIG_HOME/GnuChanWelcome/welcome.conf` when that variable is set:
 
 ```conf
 FirstRunComplete = true
 ```
 
-The file is created only after the user closes the welcome guide. `--first-run`
-shows the guide until then; `--config PATH` overrides the state file for
-testing or per-user administration. `--check-config` validates a config file
-without opening a window.
-
-GnuChanSettings provides a **GnuChanWelcome** category/entry for this guide's
-`welcome.conf` file.
+The application creates this state after the window is closed. `--config PATH`
+selects another state file, and `--check-config` validates it without opening
+an X11 window. GnuChanSettings provides a GnuChanWelcome category for this
+file.
 
 ## Included programs
 
@@ -74,19 +82,8 @@ GnuChanSettings, GnuChanSoftwareCenter, GnuChanSound, GnuChanSoundRecord,
 GnuChanSS, GnuChanTerm, GnuChanTop, GnuChanWelcome, GnuChanWifi, GnuChanWM,
 and GnuChanBluetooth.
 
-GnuChanGUI is a reusable toolkit/library, not a launchable program, so it has
-no standalone config or GnuChanSettings category. GnuChanBrowser's card points
-to its source-tree `GnuChanBrowser.conf` template, which is not currently loaded
-by the browser or exposed in GnuChanSettings. The GnuChanLockScreen project is
-the screen locker installed as `GnuChanSL`; its card uses the project name and
-points to `~/.config/GnuChanSL/GnuChanSL.conf`, configured in the GnuChanSL
-category. It is not listed as a separate GnuChanSL project.
-
-The GnuChanWelcome card lists its own
-`~/.config/GnuChanWelcome/welcome.conf` and GnuChanWelcome Settings category.
-GnuChanSound and GnuChanSettings share
+GnuChanGUI is a reusable toolkit/library, not a launchable program. The
+GnuChanBrowser card identifies its config as an unapplied source template. The
+screen locker project is GnuChanLockScreen and its installed executable and
+settings category are named GnuChanSL. GnuChanSound and GnuChanSettings share
 `~/.config/GnuChanSettings/system.conf`.
-
-GnuChanSettings also provides Autostart and GnuChan Themes categories; these
-configure the session startup list and shared desktop theme rather than
-separate programs.
